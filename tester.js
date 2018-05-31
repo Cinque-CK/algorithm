@@ -1,6 +1,6 @@
 const jsNativeSort = require('./sort/jsNativeSort');
 const selectionSort = require('./sort/selectionSort');
-
+const insertionSort = require('./sort/insertionSort')
 function _compare(testCase, ...args) {
     for (let algoFunc of args.entries()) {
         if (typeof algoFunc[1] === 'function') {
@@ -38,4 +38,4 @@ function _sortResultCheck(arr) {
 
 const testCase = _sortTestCaseGen();
 
-_compare(testCase, jsNativeSort, selectionSort);
+_compare(testCase, jsNativeSort, selectionSort, insertionSort);
