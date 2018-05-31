@@ -1,6 +1,7 @@
 const jsNativeSort = require('./sort/jsNativeSort');
 const selectionSort = require('./sort/selectionSort');
 const insertionSort = require('./sort/insertionSort')
+const quickSort3Ways = require('./sort/quickSort')
 function _compare(testCase, ...args) {
     for (let algoFunc of args.entries()) {
         if (typeof algoFunc[1] === 'function') {
@@ -19,7 +20,7 @@ function _compare(testCase, ...args) {
 
 function _sortTestCaseGen() {
     let testCase = [];
-    for (let i = 0; i < 50000; i++) {
+    for (let i = 0; i < 10; i++) {
         const ele = Math.floor(Math.random() * 10000);
         testCase.push(ele);
     }
@@ -29,13 +30,15 @@ function _sortTestCaseGen() {
 function _sortResultCheck(arr) {
     for (let i = 0; i < arr.length - 1; i++) {
         if (arr[i] > arr[i + 1]) {
-            console.log(arr[i], arr[i + 1]);
             return false;
         }
     }
     return true;
 }
 
-const testCase = _sortTestCaseGen();
+function main() {
+    const testCase = _sortTestCaseGen();
+    _compare(testCase, jsNativeSort, quickSort3Ways, insertionSort);
+}
 
-_compare(testCase, jsNativeSort, selectionSort, insertionSort);
+main()

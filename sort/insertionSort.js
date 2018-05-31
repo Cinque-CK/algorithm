@@ -1,9 +1,11 @@
-const insertionSort = function(arr) {
+const insertionSort = function (arr) {
     for (let i = 1; i < arr.length; i++) {
-        for (let j = 0; j < i; j++) {
-            if (arr[i] < arr[j]) {
-                arr.splice(j, 0, arr[i]);
-                arr.splice(i + 1, 1);
+        const temp = arr[i];
+        for (let j = i - 1; j > 0; j--) {
+            if (temp < arr[j]) {
+                arr[j + 1] = arr[j];
+            } else {
+                arr[j] = temp;
                 break;
             }
         }
