@@ -1,30 +1,12 @@
-const jsNativeSort = require('./sort/jsNativeSort');
-const selectionSort = require('./sort/selectionSort');
-const insertionSort = require('./sort/insertionSort')
-const quickSort3Ways = require('./sort/quickSort')
-function _compare(testCase, ...args) {
-    for (let algoFunc of args.entries()) {
-        if (typeof algoFunc[1] === 'function') {
-            let temp = JSON.parse(JSON.stringify(testCase));
-            const startTime = new Date().getTime();
-            const result = algoFunc[1](temp);
-            const endTime = new Date().getTime();
-            if (_sortResultCheck(result)) {
-                console.log(`Algorithm ${algoFunc[0] + 1} took ${endTime - startTime} ms.`);
-            } else {
-                console.log(`Algorithm ${algoFunc[0] + 1} error.`);
-            }
-        }
-    }
-}
+require('./sort.js');
 
 function _sortTestCaseGen() {
-    let testCase = [];
-    for (let i = 0; i < 10; i++) {
-        const ele = Math.floor(Math.random() * 10000);
-        testCase.push(ele);
+    let array = [];
+    for (let i = 0; i < 500000; i++) {
+        const ele = Math.floor(Math.random() * 200);
+        array.push(ele);
     }
-    return testCase;
+    return array;
 }
 
 function _sortResultCheck(arr) {
@@ -36,9 +18,23 @@ function _sortResultCheck(arr) {
     return true;
 }
 
-function main() {
-    const testCase = _sortTestCaseGen();
-    _compare(testCase, jsNativeSort, quickSort3Ways, insertionSort);
+function _sortTester(array, ...funcs) {
+    for (let func of funcs) {
+        let temp = array.slice(0);
+        const startTime = new Date().getTime();
+        temp[func]();
+        const endTime = new Date().getTime();
+        if (_sortResultCheck(temp)) {
+            console.log(`Algorithm ${func} took ${endTime - startTime} ms.`);
+        } else {
+            console.log(`Algorithm ${func} error.`);
+        }
+    }
 }
 
-main()
+function main() {
+    const testCase = _sortTestCaseGen();
+    _sortTester(testCase,'native_sort', 'quick_sort3');
+}
+
+main();

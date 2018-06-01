@@ -6,7 +6,6 @@ function _quickSort3Ways(arr, l, r) {
     // }
     let lt = l;
     let gt = r + 1;
-    debugger
     for (let i = l + 1; i < gt; i++) {
         if (arr[i] < arr[l]) {
             let temp = arr[lt + 1];
