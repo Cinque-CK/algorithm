@@ -1,9 +1,9 @@
 require('./sort.js');
-
+const Heap = require('./heap.js');
 function _sortTestCaseGen() {
     let array = [];
-    for (let i = 0; i < 500000; i++) {
-        const ele = Math.floor(Math.random() * 200);
+    for (let i = 0; i < 1000000; i++) {
+        const ele = Math.floor(Math.random() * 20);
         array.push(ele);
     }
     return array;
@@ -33,8 +33,8 @@ function _sortTester(array, ...funcs) {
 }
 
 function main() {
-    const testCase = _sortTestCaseGen();
-    _sortTester(testCase,'native_sort', 'quick_sort3');
+    const testCase = _sortTestCaseGen(); _sortTester(testCase,'native_sort', 'quick_sort3', 'heap_sort');
+   
 }
 
 main();

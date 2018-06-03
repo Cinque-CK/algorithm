@@ -1,8 +1,9 @@
-Array.prototype.native_sort = function() {
+const Heap = require('./heap');
+Array.prototype.native_sort = function () {
     this.sort((a, b) => a - b);
 };
 
-Array.prototype.selection_sort = function() {
+Array.prototype.selection_sort = function () {
     for (let i = 0; i < this.length; i++) {
         let minIndex = i;
         for (let j = i + 1; j < this.length; j++) {
@@ -15,7 +16,7 @@ Array.prototype.selection_sort = function() {
     }
 };
 
-Array.prototype.selection_sort2 = function() {
+Array.prototype.selection_sort2 = function () {
     for (let i = 0; i < this.length; i++) {
         let minIndex = i;
         for (let j = i + 1; j < this.length; j++) {
@@ -26,7 +27,7 @@ Array.prototype.selection_sort2 = function() {
     }
 };
 
-Array.prototype.insertion_sort = function() {
+Array.prototype.insertion_sort = function () {
     for (let i = 1; i < this.length; i++) {
         const temp = this[i];
         for (let j = i - 1; j >= 0; j--) {
@@ -69,6 +70,18 @@ function _quick_sort3(array, left, right) {
     _quick_sort3(array, left, lt - 1);
     _quick_sort3(array, gt, right);
 }
-Array.prototype.quick_sort3 = function() {
+Array.prototype.quick_sort3 = function () {
     _quick_sort3(this, 0, this.length - 1);
 };
+
+Array.prototype.heap_sort = function () {
+
+    let heap = new Heap();
+    for (let i = 0; i < this.length; i++) {
+        heap.insert(this[i])
+    }
+    const length = heap.value.length;
+    for (let i = 0; i < length - 1; i++) {
+        this[length - 2 - i] = heap.extract()
+    }
+}
