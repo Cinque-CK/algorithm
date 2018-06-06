@@ -76,12 +76,9 @@ Array.prototype.quick_sort3 = function () {
 
 Array.prototype.heap_sort = function () {
 
-    let heap = new Heap();
-    for (let i = 0; i < this.length; i++) {
-        heap.insert(this[i])
-    }
+    let heap = new Heap(this);
     const length = heap.value.length;
-    for (let i = 0; i < length - 1; i++) {
-        this[length - 2 - i] = heap.extract()
+    for (let i = 0; i < length; i++) {
+        this[length - 1 - i] = heap.extract()
     }
 }

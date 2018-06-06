@@ -1,49 +1,53 @@
 class Heap {
-    constructor() {
-        this._array = [-1];
+    constructor(array) {
+        this._array = this._heapify(array);
     }
 
-    _shiftUp() {
-        let i = this._array.length - 1;
-        while (i > 1 && this._array[i] > this._array[Math.floor(i / 2)]) {
-            let temp = this._array[Math.floor(i / 2)];
-            this._array[Math.floor(i / 2)] = this._array[i];
+    _shiftUp(i) {
+        while (i > 0 && this._array[i] > this._array[Math.floor((i - 1) / 2)]) {
+            let temp = this._array[Math.floor((i - 1) / 2)];
+            this._array[Math.floor((i - 1) / 2)] = this._array[i];
             this._array[i] = temp;
-            i = Math.floor(i / 2);
+            i = Math.floor((i - 1) / 2);
         }
     }
 
-    _shiftDown() {
-        let i = 1;
-        while (i * 2 < this._array.length) {
-            let j = 2 * i;
-            if (j + 1 < this._array.length && this._array[j + 1] > this._array[j]) {
-                j++
+    _shiftDown(array, i) {
+        while (i * 2 + 1 < array.length) {
+            let j = 2 * i + 1;
+            if (j + 1 < array.length && array[j + 1] > array[j]) {
+                j++;
             }
-            if (this._array[i] >= this._array[j]) {
+            if (array[i] >= array[j]) {
                 break;
             }
-            let temp = this._array[j];
-            this._array[j] = this._array[i];
-            this._array[i] = temp;
+            let temp = array[j];
+            array[j] = array[i];
+            array[i] = temp;
             i = j;
         }
     }
 
+    _heapify(array){
+        const length = array.length;
+        for(let i = length - 1; i >=0; i--){
+            this._shiftDown(array, i);
+        }
+        return array;
+    }
+
     insert(ele) {
-        this
-            ._array
-            .push(ele)
-        this._shiftUp()
+        this._array.push(ele);
+        this._shiftUp(this._array.length - 1);
     }
 
     extract() {
-        const ele = this._array[1];
+        const ele = this._array[0];
         let temp = ele;
-        this._array[1] = this._array[this._array.length - 1]
+        this._array[0] = this._array[this._array.length - 1];
         this._array[this._array.length - 1] = temp;
         this._array.pop();
-        this._shiftDown();
+        this._shiftDown(0);
         return ele;
     }
 

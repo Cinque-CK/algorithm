@@ -3,7 +3,7 @@ const Heap = require('./heap.js');
 function _sortTestCaseGen() {
     let array = [];
     for (let i = 0; i < 1000000; i++) {
-        const ele = Math.floor(Math.random() * 20);
+        const ele = Math.floor(Math.random() * 200000);
         array.push(ele);
     }
     return array;
@@ -33,8 +33,8 @@ function _sortTester(array, ...funcs) {
 }
 
 function main() {
-    const testCase = _sortTestCaseGen(); _sortTester(testCase,'native_sort', 'quick_sort3', 'heap_sort');
-   
+    const testCase = _sortTestCaseGen(); 
+    _sortTester(testCase,'heap_sort', 'native_sort', 'quick_sort3', 'heap_sort');
 }
 
 main();
