@@ -34,7 +34,7 @@ function _sortTester(array, ...funcs) {
 
 function main() {
     const testCase = _sortTestCaseGen(); 
-    _sortTester(testCase,'heap_sort', 'native_sort', 'quick_sort3', 'heap_sort');
+    _sortTester(testCase, 'native_sort', 'quick_sort3', 'heap_sort');
 }
 
 main();
